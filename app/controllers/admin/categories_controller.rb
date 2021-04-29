@@ -1,7 +1,5 @@
 class Admin::CategoriesController < ApplicationController
 
-  ApplicationHelper::http_authenticate
-
   def index
     @categories = Category.order(id: :desc).all
   end
@@ -21,6 +19,8 @@ class Admin::CategoriesController < ApplicationController
   end
 
   private
+
+  http_basic_authenticate_with name: "Jungle", password: "book"
 
   def category_params
     params.require(:category).permit(
