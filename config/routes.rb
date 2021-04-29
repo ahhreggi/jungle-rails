@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :categories, except: [:edit, :update, :show, :destroy]
   end
 
-  get '/about', => 'about#index'
+  get '/about' => 'about#index'
 
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
