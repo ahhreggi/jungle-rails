@@ -124,5 +124,17 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages_for(:password_confirmation)).to include "Password and confirmation must match"
     end
 
+    it "fails to create a new user if password is too short (< 8 characters)" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "pass",
+        password_confirmation: "pass"
+      )
+      expect(@user).to be_invalid
+      expect(@user.errors.full_messages_for(:password)).to include "Password must have a minimum length of 8 characters"
+    end
+
   end
 end
