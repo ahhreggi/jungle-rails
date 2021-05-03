@@ -14,6 +14,80 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
+    it "fails to create a new user if first name is not provided" do
+      @user = User.new(
+        first_name: nil,
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      expect(@user).to be_invalid
+      expect(@user.errors.full_messages_for(:first_name)).to include "First name cannot be blank"
+    end
+
+    it "fails to create a new user if last name is not provided" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: nil,
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      expect(@user).to be_invalid
+      expect(@user.errors.full_messages_for(:last_name)).to include "Last name cannot be blank"
+    end
+
+    it "fails to create a new user if email is not provided" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: nil,
+        password: "password",
+        password_confirmation: "password"
+      )
+      expect(@user).to be_invalid
+      expect(@user.errors.full_messages_for(:email)).to include "Email cannot be blank"
+    end
+
+    it "fails to create a new user if the given email is already taken (exact match)" do
+      @user1 = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @user2 = User.new(
+        first_name: "Reggi2",
+        last_name: "Sirilan2",
+        email: "rs@rs.ca",
+        password: "password2",
+        password_confirmation: "password2"
+      )
+      expect(@user).to be_invalid
+      expect(@user.errors.full_messages_for(:email)).to include("Email has already been taken")
+    end
+
+    it "fails to create a new user if the given email is already taken (case insensitive)" do
+      @user1 = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @user2 = User.new(
+        first_name: "Reggi2",
+        last_name: "Sirilan2",
+        email: "RS@RS.CA",
+        password: "password2",
+        password_confirmation: "password2"
+      )
+      expect(@user).to be_invalid
+      expect(@user.errors.full_messages_for(:email)).to include("Email has already been taken")
+    end
+
     it "fails to create a new user if password is not provided" do
       @user = User.new(
         first_name: "Reggi",
@@ -48,25 +122,6 @@ RSpec.describe User, type: :model do
       )
       expect(@user).to be_invalid
       expect(@user.errors.full_messages_for(:password_confirmation)).to include "Password and confirmation must match"
-    end
-
-    it "fails to create a new user if the given email is already taken" do
-      @user1 = User.new(
-        first_name: "Reggi",
-        last_name: "Sirilan",
-        email: "rs@rs.ca",
-        password: "password",
-        password_confirmation: "password"
-      )
-      @user2 = User.new(
-        first_name: "Reggi2",
-        last_name: "Sirilan2",
-        email: "rs@rs.ca",
-        password: "password2",
-        password_confirmation: "password2"
-      )
-      expect(@user).to be_invalid
-      expect(@user.errors.full_messages_for(:email)).to include("Email has already been taken")
     end
 
   end
