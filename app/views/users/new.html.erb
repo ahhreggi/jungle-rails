@@ -2,15 +2,30 @@
 
 <%= form_for :user, url: '/users' do |f| %>
 
-  <div>Name:</div>
-    <div><%= f.text_field :name %></div>
-  <div>Email:</div>
-    <div><%= f.text_field :email %></div>
-  <div>Password:</div>
-    <div><%= f.password_field :password %></div>
-  <div>Password Confirmation:</div>
-    <div><%= f.password_field :password_confirmation %></div>
-  <br>
-  <div><%= f.submit "Submit" %></div>
+  <div class="form-group">
+    <%= label_tag :first_name, 'First Name' %>
+    <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+  </div>
 
+  <div class="form-group">
+    <%= label_tag :last_name, 'Last Name' %>
+    <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :email, 'Email' %>
+    <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :password, 'Password' %>
+    <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :password_confirmation, 'Password Confirmation' %>
+    <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation' %>
+  </div>
+
+  <%= f.submit "Submit" %>
 <% end %>
