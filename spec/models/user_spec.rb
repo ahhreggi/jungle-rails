@@ -177,6 +177,18 @@ RSpec.describe User, type: :model do
       expect(@result).to eq @user
     end
 
+    it "returns a user instance if authentication is successful (email includes whitespace)" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @result = User.authenticate_with_credentials(" rs@rs.ca ", "password")
+      expect(@result).to eq @user
+    end
+
   end
 
 end
