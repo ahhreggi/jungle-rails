@@ -30,7 +30,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <% if session[:user_id]%>
+        <% if session[:user_id] %>
             <li class="navbar-text">
               Signed in as <%= current_user.first_name %>
             </li>
@@ -57,11 +57,13 @@
             <li><%= link_to 'Categories',  [:admin, :categories] %></li>
           </ul>
         </li>
-        <li>
-          <%= link_to cart_path do %>
-            <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
-          <% end %>
-        </li>
+        <% if session[:user_id]%>
+          <li>
+            <%= link_to cart_path do %>
+              <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
