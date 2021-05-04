@@ -141,7 +141,19 @@ RSpec.describe User, type: :model do
 
   describe '.authenticate_with_credentials' do
 
-    it "returns a user instance if authentication is successful" do
+    it "returns nil if authentication is unsuccessful" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @result = User.authenticate_with_credentials("rs@rs.ca", "wrongpassword")
+      expect(@result).to eq nil
+    end
+
+    it "returns a user instance if authentication is successful (exact match)" do
       @user = User.new(
         first_name: "Reggi",
         last_name: "Sirilan",
@@ -150,6 +162,18 @@ RSpec.describe User, type: :model do
         password_confirmation: "password"
       )
       @result = User.authenticate_with_credentials("rs@rs.ca", "password")
+      expect(@result).to eq @user
+    end
+
+    it "returns a user instance if authentication is successful (email case-insensitive)" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @result = User.authenticate_with_credentials("RS@RS.CA", "password")
       expect(@result).to eq @user
     end
 
