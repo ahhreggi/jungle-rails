@@ -4,17 +4,25 @@ RSpec.feature "UserLogins", type: :feature, js: true do
 
   # SETUP
   before :each do
-    @category = Category.create! name: 'Apparel'
+    User.create!(
+      first_name: 'Reggi',
+      last_name: 'Sirilan',
+      email: 'rs@rs.ca',
+      password: 'password',
+      password_confirmation: 'password'
+    )
+  end
 
-    10.times do |n|
-      @category.products.create!(
-        name:  Faker::Hipster.sentence(3),
-        description: Faker::Hipster.paragraph(4),
-        image: open_asset('apparel1.jpg'),
-        quantity: 10,
-        price: 64.99
-      )
-    end
+  scenario "Visitor is redirected to home page after signing in" do
+    # ACT
+    visit login_path
+    fill_in "email", with: "rs@rs.ca"
+    fill_in "password", with: "password"
+    click_button("Submit")
+
+    # DEBUG/VERIFY
+    save_screenshot
+    expect(page).to have_content("Signed in as Reggi")
   end
 
 end
