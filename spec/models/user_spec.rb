@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+
   describe 'Validations' do
 
     it "creates a new user given a first & last name, email, password, and valid password confirmation" do
@@ -137,4 +138,21 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  describe '.authenticate_with_credentials' do
+
+    it "returns a user instance if authentication is successful" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @result = User.authenticate_with_credentials("rs@rs.ca", "password")
+      expect(@result).to eq @user
+    end
+
+  end
+
 end
