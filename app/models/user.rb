@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     self.email.downcase!
   end
 
-  def authenticate_with_credentials(email, password)
+  def self.authenticate_with_credentials(email, password)
     User.find_by(email: email.strip.downcase).try(:authenticate, password) || nil
   end
 
