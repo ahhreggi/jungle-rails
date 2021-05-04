@@ -17,4 +17,14 @@ RSpec.feature "AddToCarts", type: :feature, js: true do
     end
   end
 
+  scenario "They can add an item to 'My Cart' and see the item counter increment by 1" do
+    # ACT
+    visit root_path
+    page.first("form.button_to").find_button("Add").click
+
+    # DEBUG/VERIFY
+    save_screenshot
+    expect(page.find "nav").to have_text "My Cart (1)"
+  end
+
 end
