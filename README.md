@@ -1,33 +1,82 @@
-# Jungle
+<!-- TITLE -->
+<div align="center">
+<h1>
+Jungle
+</h1>
+<img src="public/rubyrails.png" width=200 alt="rubyrails.png" />
+<p>A mini Rails e-commerce application
+</p>
 
-A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
+<p>Built with <a href="http://rubyonrails.org/">Rails 4.2</a>, <a href="https://www.postgresql.org/">PostgreSQL</a>, <a href="https://bootstrapdocs.com/v3.3.6/docs/getting-started/">Bootstrap</a> and CSS/<a href="https://sass-lang.com/">Sass</a>
+</div>
 
-## Additional Steps for Apple M1 Machines
+<!-- INTRODUCTION -->
 
-1. Make sure that you are runnning Ruby 2.6.6 (`ruby -v`)
-1. Install ImageMagick `brew install imagemagick imagemagick@6 --build-from-source`
-2. Remove Gemfile.lock
-3. Replace Gemfile with version provided [here](https://gist.githubusercontent.com/FrancisBourgouin/831795ae12c4704687a0c2496d91a727/raw/ce8e2104f725f43e56650d404169c7b11c33a5c5/Gemfile)
+## 📚 Introduction
 
-## Setup
+<b>Jungle</b> is a mini e-commerce application built for the purpose of learning Rails by example.
 
-1. Run `bundle install` to install dependencies
-2. Create `config/database.yml` by copying `config/database.example.yml`
-3. Create `config/secrets.yml` by copying `config/secrets.example.yml`
-4. Run `bin/rake db:reset` to create, load and seed db
-5. Create .env file based on .env.example
+<b><p>Built with <a href="http://rubyonrails.org/">Rails 4.2</a>, <a href="https://www.postgresql.org/">PostgreSQL</a>, <a href="https://bootstrapdocs.com/v3.3.6/docs/getting-started/">Bootstrap</a> and CSS/<a href="https://sass-lang.com/">Sass</a>. Tested using <a href="https://rspec.info/">RSpec</a>, <a href="https://github.com/teamcapybara/capybara">Capybara</a> (<a href="https://github.com/teampoltergeist/poltergeist">Poltergeist</a>, <a href="https://phantomjs.org/">PhantomJS</a>).</b>
+
+<!-- INSTALLATION -->
+
+## 🛠 Installation
+
+1. Clone or download this repository
+   ```
+   git clone https://github.com/ahhreggi/jungle-rails
+   ```
+2. Navigate to the project directory and install dependencies
+   ```
+   cd jungle-rails
+   bundle install
+   ```
+3. Create `config/database.yml`
+   ```
+   cp config/database.example.yml config/database.yml
+   ```
+4. Create `config/secrets.yml`
+   ```
+   cp config/secrets.example.yml config/secrets.yml
+   ```
+5. Create, load, and seed the database
+   ```
+   bin/rake db:reset
+   ```
 6. Sign up for a Stripe account
-7. Put Stripe (test) keys into appropriate .env vars
-8. Run `bin/rails s -b 0.0.0.0` to start the server
+   - https://stripe.com/en-ca
+7. Create `.env` and update with your own Stripe & admin info
+   ```
+   cp .env.example .env
+   ```
+8. Launch the development web server
+   ```
+   bin/rails s -b 0.0.0.0
+   ```
+9. Visit <a href="http://localhost:3000/">http://localhost:3000/</a> on your browser
 
-## Stripe Testing
+## ✔️ Testing (RSpec, Stripe)
 
-Use Credit Card # 4111 1111 1111 1111 for testing success scenarios.
+1. Run BDD tests (RSpec)
+   ```
+   rspec
+   ```
+2. Manually test Stripe checkout scenarios using the following info:
+   ```
+   # Card number
+   4242 4242 4242 4242
 
-More information in their docs: <https://stripe.com/docs/testing#cards>
+   # Expiration date (can be any future date)
+   05/33
 
-## Dependencies
+   # CVC (can be any 3 numbers)
+   123
+   ```
+   - Check out the Stripe docs for more info: <https://stripe.com/docs/testing#cards>
 
-* Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
-* PostgreSQL 9.x
-* Stripe
+## 📷 Screenshots
+<img src="public/screenshots/home.png" alt="home.png">
+<img src="public/screenshots/show.png" alt="show.png">
+<img src="public/screenshots/mycart.png" alt="mycart.png">
+<img src="public/screenshots/order.png" alt="order.png">
+<img src="public/screenshots/admin.png" alt="admin.png">
