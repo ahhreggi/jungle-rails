@@ -144,56 +144,60 @@ RSpec.describe User, type: :model do
 
   end
 
-  # describe '.authenticate_with_credentials' do
+  describe '.authenticate_with_credentials' do
 
-  #   it "returns nil if authentication is unsuccessful" do
-  #     @user = User.new(
-  #       first_name: "Reggi",
-  #       last_name: "Sirilan",
-  #       email: "rs@rs.ca",
-  #       password: "password",
-  #       password_confirmation: "password"
-  #     )
-  #     @result = User.authenticate_with_credentials("rs@rs.ca", "wrongpassword")
-  #     expect(@result).to eq nil
-  #   end
+    it "returns nil if authentication is unsuccessful" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @user.save
+      @result = User.authenticate_with_credentials("rs@rs.ca", "wrongpassword")
+      expect(@result).to eq nil
+    end
 
-  #   it "returns a user instance if authentication is successful (exact match)" do
-  #     @user = User.new(
-  #       first_name: "Reggi",
-  #       last_name: "Sirilan",
-  #       email: "rs@rs.ca",
-  #       password: "password",
-  #       password_confirmation: "password"
-  #     )
-  #     @result = User.authenticate_with_credentials("rs@rs.ca", "password")
-  #     expect(@result).to eq @user
-  #   end
+    it "returns a user instance if authentication is successful (exact match)" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @user.save
+      @result = User.authenticate_with_credentials("rs@rs.ca", "password")
+      expect(@result).to eq @user
+    end
 
-  #   it "returns a user instance if authentication is successful (email case-insensitive)" do
-  #     @user = User.new(
-  #       first_name: "Reggi",
-  #       last_name: "Sirilan",
-  #       email: "rs@rs.ca",
-  #       password: "password",
-  #       password_confirmation: "password"
-  #     )
-  #     @result = User.authenticate_with_credentials("RS@RS.CA", "password")
-  #     expect(@result).to eq @user
-  #   end
+    it "returns a user instance if authentication is successful (email case-insensitive)" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @user.save
+      @result = User.authenticate_with_credentials("RS@RS.CA", "password")
+      expect(@result).to eq @user
+    end
 
-  #   it "returns a user instance if authentication is successful (email includes whitespace)" do
-  #     @user = User.new(
-  #       first_name: "Reggi",
-  #       last_name: "Sirilan",
-  #       email: "rs@rs.ca",
-  #       password: "password",
-  #       password_confirmation: "password"
-  #     )
-  #     @result = User.authenticate_with_credentials(" rs@rs.ca ", "password")
-  #     expect(@result).to eq @user
-  #   end
+    it "returns a user instance if authentication is successful (email includes whitespace)" do
+      @user = User.new(
+        first_name: "Reggi",
+        last_name: "Sirilan",
+        email: "rs@rs.ca",
+        password: "password",
+        password_confirmation: "password"
+      )
+      @user.save
+      @result = User.authenticate_with_credentials(" rs@rs.ca ", "password")
+      expect(@result).to eq @user
+    end
 
-  # end
+  end
 
 end

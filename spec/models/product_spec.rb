@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
+
   describe 'Validations' do
 
     it "saves a product given a name, price, quantity, and category" do
@@ -38,4 +39,5 @@ RSpec.describe Product, type: :model do
     end
 
   end
+
 end
